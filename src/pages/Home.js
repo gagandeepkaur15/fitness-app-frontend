@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from "../components/WorkoutForm";
+import { useWorkoutsContext } from "../hooks/useWorkoutContext";
 
 const Home = () => {
 
-    const [workouts, setWorkouts] = useState(null); 
+    // const [workouts, setWorkouts] = useState(null);
+    const {workouts, dispatch} = useWorkoutsContext();
 
     useEffect(()=>{
         const fetchWorkoutsFunc = async () => {
@@ -12,11 +14,10 @@ const Home = () => {
             // NOTE - this proxy path only works for dev and not for production
             // const response = await fetch('http://localhost:4000/api/workouts');
             const data = await response.json();
-            console.log("Data");
-            console.log(data);
  
             if(response.ok){
-                setWorkouts(data);
+                // setWorkouts(data);
+                dispatch({type: 'SET_WORKOUTS', payload: data})
             }
         }
         fetchWorkoutsFunc();

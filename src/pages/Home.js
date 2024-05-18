@@ -21,7 +21,7 @@ const Home = () => {
             }
         }
         fetchWorkoutsFunc();
-    }, []);
+    }, [dispatch]); //When we want to use external functions like dispatch in this case which are not defined inside then we declare them inside the dependency array
 
     return (
         <div className="home">
